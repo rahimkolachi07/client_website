@@ -56,7 +56,11 @@ for i, field in enumerate(fields["fields"]):
                 blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                 topics["topics"][i]="done"
                 topics.to_csv("topics.csv",index=False)
-                time.sleep(12*60*60)
+                for i in range(12*60*60):
+                    tim=12*60*60
+                    i=i+1
+                    time.sleep(1)
+                    print("new post will be uploaded after ",tim-i," Seconds")
 
         fields["fields"][i]="done"
         os.remove("topics.csv")
