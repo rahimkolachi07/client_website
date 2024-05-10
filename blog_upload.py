@@ -1,0 +1,52 @@
+from wordpress_xmlrpc import Client, WordPressPost
+from wordpress_xmlrpc.methods.posts import NewPost
+import shutil
+from upload import *
+
+# WordPress site URL and credentials
+
+
+
+
+def blog_post(topic,subtopics,blog1,blog2,blog3,blog4):
+    print("uploading")
+    wordpress_url = 'http://www.spreadit.es//xmlrpc.php'
+    wordpress_username = 'spreadit.mkt@gmail.com'
+    wordpress_password = 'ArthurFiverrAccess22!'
+    # Create WordPress client
+    client = Client(wordpress_url, wordpress_username, wordpress_password)
+
+    # Create a new WordPress post
+    post = WordPressPost()
+
+    post.title = topic
+    post.content = f"""
+    <h3>{subtopics[0]}</h3>
+    <p align="justify">{blog1}</p>
+
+    
+    <h3>{subtopics[1]}</h3>
+    <p align="justify">{blog2}</p>
+
+
+    <h3>{subtopics[2]}</h3>
+    <p align="justify">{blog3}</p>
+
+
+    <h3>{subtopics[3]}</h3>
+    <p align="justify">{blog4}</p>
+
+
+    """
+    post.post_status = 'publish'  # Cshange to 'draft' if you want to save as draft
+    post.thumbnail = upload_image("feature_image.png")
+
+    # Publish the post
+    post_id = client.call(NewPost(post))
+    print("Post created successfully!")
+    print("New post ID:", post_id)
+    try:
+        shutil.rmtree("images")
+        print(f"Folder images deleted successfully.")
+    except OSError as e:
+        print(f"Error: images : {e.strerror}")
