@@ -1,49 +1,58 @@
+import tweepy
+
+consumer_key = 'xk8MG1mKx9avwBeOokKiZJoVM'
+consumer_secret = '6wagl0scIIExjG1tT1r2HFPEXCmzKQNvFCR37aRKLFJiTBTOdI'
+access_token = '1495398532588744707-cCaj2L1GPgEAE9kx17Gar6eH0QaF3w'
+access_token_secret = 'ahpxvyDoPUaYCGaIFmwXuw6uLPe5kP4AngGCxeqMlvqxi'
+
+Bearer_Token="AAAAAAAAAAAAAAAAAAAAAPHvtgEAAAAA%2FiQhqwR1S7bkjXBXxrBOEzmkafQ%3D5rgiC1IGgiTvd87MwRfmyF4gfbHKSAPlj7F17IIQ4yJzTmoaCF"
+
+Client_ID="OFlXU24zRnZUVk5FWENyZFJKMmc6MTpjaQ"
+Client_Secret="M6Dys_PK2a6oQj2gZkwlyACwlySSKkJuMExxbOnUxONkIYymPY"
+
 import requests
+import json
+import ssl
 
-def get_access_token(client_id, client_secret):
-    url = "https://www.linkedin.com/oauth/v2/accessToken"
-    data = {
-        "grant_type": "client_credentials",
-        "client_id": client_id,
-        "client_secret": client_secret
-    }
-    response = requests.post(url, data=data)
-    access_token = response.json()["access_token"]
-    return access_token
-
-def post_on_linkedin_page(access_token, page_id, message):
-    url = "https://api.linkedin.com/v2/ugcPosts"
+def post_tweet(bearer_token, tweet_content):
+    # Headers
     headers = {
-        "Authorization": f"Bearer {access_token}",
-        "X-Restli-Protocol-Version": "2.0.0",
+        "Authorization": f"Bearer {bearer_token}",
         "Content-Type": "application/json"
     }
-    data = {
-        "author": f"urn:li:organization:{page_id}",
-        "lifecycleState": "PUBLISHED",
-        "specificContent": {
-            "com.linkedin.ugc.ShareContent": {
-                "shareCommentary": {
-                    "text": message
-                },
-                "shareMediaCategory": "NONE"
-            }
-        },
-        "visibility": {
-            "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
-        }
+
+    # API endpoint
+    url = "https://api.twitter.com/2/tweets"
+
+    # Tweet data
+    tweet_data = {
+        "text": tweet_content
     }
-    response = requests.post(url, headers=headers, json=data)
-    if response.status_code == 201:
-        print("Post successful!")
-    else:
-        print("Post failed:", response.text)
 
-# Example usage
-client_id = "77krtzupfybgcy"
-client_secret = "iIrIblPq4PPf4gAQ"
-page_id = "90700161"
-message = "Hello LinkedIn Page! This is a test post from Python."
+    # Suppress SSL warning
+    requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-access_token = "AQXL_FO-A1VpmDFAfmuj_mD_JoZwHGpPJWm3hJtV4BL3Y7bnYU39pPLX-6zpGPTjvO49xWsYSYvCBy_iPhCkvanJNnHQqxDqPbx-AQcT63VXOqBz2uwYBR8KtBV1_ZMxaNy2MOyl7nfP6buixmvgftc_a-VE1vHupEHG3VpquKdpffI2bWam2qR8YLI0DmZOrvhzNiwHkXfONzTUc14F2EGUyWbBZfaH-jbxPIetR7whXR2osFQjiiEWBYaRkew3jPNFfneBwOkcPwRgSHV1rxZn3X8npiQ6yMNTS8uAiisf4DLb_FQi198wG2ULha-NjFumAeeeFUcfy6oVCL9DNpjNGf42eg"
-post_on_linkedin_page(access_token, page_id, message)
+    try:
+        # Post tweet
+        response = requests.post(url, headers=headers, json=tweet_data, verify=True, timeout=30)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+
+        if response.status_code == 201:
+            print("Tweet posted successfully!")
+        else:
+            print("Failed to post tweet. Error:", response.text)
+    except requests.exceptions.HTTPError as e:
+        print("HTTP error occurred:", e)
+    except requests.exceptions.ConnectionError as e:
+        print("Error connecting to the server:", e)
+    except requests.exceptions.Timeout as e:
+        print("Timeout error:", e)
+    except requests.exceptions.RequestException as e:
+        print("An unexpected error occurred:", e)
+
+if __name__ == "__main__":
+    # Replace with your actual Bearer Token and tweet content
+    bearer_token = "AAAAAAAAAAAAAAAAAAAAAPHvtgEAAAAA%2FiQhqwR1S7bkjXBXxrBOEzmkafQ%3D5rgiC1IGgiTvd87MwRfmyF4gfbHKSAPlj7F17IIQ4yJzTmoaCF"
+    tweet_content = "Hello, this is a test tweet from my Python script!"
+
+    post_tweet(bearer_token, tweet_content)
