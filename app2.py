@@ -2,6 +2,7 @@
 from chatgpt import *
 from blog_upload import *
 import time
+from social import *
 
 text="""
 
@@ -43,8 +44,9 @@ for i, field in enumerate(fields["fields"]):
             if topic=="done":
                 print("already done with this topic")
             else:
-                subtopics=text_subtopic(topic)
-                subtopics=subtopics.split(",")
+                subtopics1=text_subtopic(topic)
+
+                subtopics=subtopics1.split(",")
                 print(subtopics)
                 blog1=text_gen(subtopics[0])
                 blog2=text_gen(subtopics[1])
@@ -53,7 +55,12 @@ for i, field in enumerate(fields["fields"]):
 
                 image_prompt=text_prompt(topic)
                 generate(image_prompt+"image quality 8k ")
-                blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
+                id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
+                time.sleep(10)
+                text=text_social(subtopics1)
+                twitter_posting(text,id)
+
+
                 topics["topics"][i]="done"
                 topics.to_csv("topics.csv",index=False)
                 for i in range(12*60*60):

@@ -3,11 +3,6 @@ from wordpress_xmlrpc.methods.posts import NewPost
 import shutil
 from upload import *
 
-# WordPress site URL and credentials
-
-
-
-
 def blog_post(topic,subtopics,blog1,blog2,blog3,blog4):
     print("uploading")
     wordpress_url = 'http://www.spreadit.es//xmlrpc.php'
@@ -50,3 +45,4 @@ def blog_post(topic,subtopics,blog1,blog2,blog3,blog4):
         print(f"Folder images deleted successfully.")
     except OSError as e:
         print(f"Error: images : {e.strerror}")
+    return post_id

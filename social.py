@@ -1,58 +1,32 @@
 import tweepy
 
-consumer_key = 'xk8MG1mKx9avwBeOokKiZJoVM'
-consumer_secret = '6wagl0scIIExjG1tT1r2HFPEXCmzKQNvFCR37aRKLFJiTBTOdI'
-access_token = '1495398532588744707-cCaj2L1GPgEAE9kx17Gar6eH0QaF3w'
-access_token_secret = 'ahpxvyDoPUaYCGaIFmwXuw6uLPe5kP4AngGCxeqMlvqxi'
+#current version 2 method
+def twitConnection():
+    consumer_key = 'koMdF12v0tA4Iz5LnYrBZDgc4'
+    consumer_secret = 'g1BRmn3xb4ACVsjYnFz3mMPMReAeQstU51p9WXShCkPX76O40a'
+    access_token = '1495398532588744707-G9LmmSefsJZVxQWAq9K2kaPs4UU1UK'
+    access_token_secret = 'nhjlqkYhOP2DXSoD4HRODooy649atVRIXmhowsEvwrTOS'
 
-Bearer_Token="AAAAAAAAAAAAAAAAAAAAAPHvtgEAAAAA%2FiQhqwR1S7bkjXBXxrBOEzmkafQ%3D5rgiC1IGgiTvd87MwRfmyF4gfbHKSAPlj7F17IIQ4yJzTmoaCF"
+    Bearer_Token="AAAAAAAAAAAAAAAAAAAAAPHvtgEAAAAAHlmVC%2F1Nd4UswbKOmqhbHIo%2BFLA%3DQNqxmi05BwPwiP8zGOKb7MWpBOgyTOx9seYM8eEUUKFwqpkdRe"
 
-Client_ID="OFlXU24zRnZUVk5FWENyZFJKMmc6MTpjaQ"
-Client_Secret="M6Dys_PK2a6oQj2gZkwlyACwlySSKkJuMExxbOnUxONkIYymPY"
+    Client_ID="OFlXU24zRnZUVk5FWENyZFJKMmc6MTpjaQ"
+    Client_Secret="1g-oqouCjZfV6FP_VvkxzVn_7FGH6T5vUVyxeYprW2I2ABX61B"
 
-import requests
-import json
-import ssl
 
-def post_tweet(bearer_token, tweet_content):
-    # Headers
-    headers = {
-        "Authorization": f"Bearer {bearer_token}",
-        "Content-Type": "application/json"
-    }
+    
+    client = tweepy.Client(
+        consumer_key = consumer_key, consumer_secret=consumer_secret,
+        access_token=access_token, access_token_secret=access_token_secret)
+     
+    return client
 
-    # API endpoint
-    url = "https://api.twitter.com/2/tweets"
 
-    # Tweet data
-    tweet_data = {
-        "text": tweet_content
-    }
+def twitter_posting(text,id): 
+    text=text+f"""
 
-    # Suppress SSL warning
-    requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
+    https://www.spreadit.es/?p={str(id)}
 
-    try:
-        # Post tweet
-        response = requests.post(url, headers=headers, json=tweet_data, verify=True, timeout=30)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-
-        if response.status_code == 201:
-            print("Tweet posted successfully!")
-        else:
-            print("Failed to post tweet. Error:", response.text)
-    except requests.exceptions.HTTPError as e:
-        print("HTTP error occurred:", e)
-    except requests.exceptions.ConnectionError as e:
-        print("Error connecting to the server:", e)
-    except requests.exceptions.Timeout as e:
-        print("Timeout error:", e)
-    except requests.exceptions.RequestException as e:
-        print("An unexpected error occurred:", e)
-
-if __name__ == "__main__":
-    # Replace with your actual Bearer Token and tweet content
-    bearer_token = "AAAAAAAAAAAAAAAAAAAAAPHvtgEAAAAA%2FiQhqwR1S7bkjXBXxrBOEzmkafQ%3D5rgiC1IGgiTvd87MwRfmyF4gfbHKSAPlj7F17IIQ4yJzTmoaCF"
-    tweet_content = "Hello, this is a test tweet from my Python script!"
-
-    post_tweet(bearer_token, tweet_content)
+    """
+    client = twitConnection()
+    response = client.create_tweet(text = text)
+    print(response)

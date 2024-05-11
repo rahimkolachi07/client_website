@@ -33,6 +33,11 @@ def text_title(message):
    answer = chat.choices[0].message.content
    return answer
 
+def text_social(message):
+   messages = [ {"role": "system", "content":" i have link for blog so. write 3 lines meximum on topic so user will attract to open the link. must be in spanish language"},{"role": "user", "content":"topic = "+message }, ]
+   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   answer = chat.choices[0].message.content
+   return answer
 
 
 
