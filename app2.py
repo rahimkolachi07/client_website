@@ -66,6 +66,10 @@ for i, field in enumerate(fields["fields"]):
                 for i in range(12*60*60):
                     tim=12*60*60
                     i=i+1
+                    b=4*60*60
+                    if i%b==0:
+                        text=text_social(subtopics1)
+                        twitter_posting(text,id)
                     time.sleep(1)
                     print("new post will be uploaded after ",tim-i," Seconds")
 
