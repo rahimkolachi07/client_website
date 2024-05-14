@@ -22,57 +22,60 @@ Crea blogs con contenido muy interactivo y interesante, que cualquier persona pu
 
 """
 fields=["Branding", "Sitios Web", "SEO y SEM","Redes Sociales", "Estrategia Digital", "Diseño", "Azafatas y Eventos", "Branding y Rebranding", "Ads y Publicidad", "Shootings", "Merchandising y soluciones de IA"]
-if os.path.exists("fields.csv"):
-    fields=pd.read_csv("fields.csv")
-else:
-    field={"fields":fields}
-    field=pd.DataFrame(field)
-    field.to_csv("fields.csv",index=False)
-    fields=pd.read_csv("fields.csv")
-for i, field in enumerate(fields["fields"]):
-    if field=="done":
-        print("already done this field")
+try:
+    if os.path.exists("fields.csv"):
+        fields=pd.read_csv("fields.csv")
     else:
-        print(field)
-        if os.path.exists("topics.csv"):
-            topics=pd.read_csv("topics.csv")
+        field={"fields":fields}
+        field=pd.DataFrame(field)
+        field.to_csv("fields.csv",index=False)
+        fields=pd.read_csv("fields.csv")
+    for i, field in enumerate(fields["fields"]):
+        if field=="done":
+            print("already done this field")
         else:
-            text_topics(field)
-            topics=pd.read_csv("topics.csv")
-        
-        for i, topic in enumerate(topics["topics"]):
-            if topic=="done":
-                print("already done with this topic")
+            print(field)
+            if os.path.exists("topics.csv"):
+                topics=pd.read_csv("topics.csv")
             else:
-                subtopics1=text_subtopic(topic)
+                text_topics(field)
+                topics=pd.read_csv("topics.csv")
+            
+            for i, topic in enumerate(topics["topics"]):
+                if topic=="done":
+                    print("already done with this topic")
+                else:
+                    subtopics1=text_subtopic(topic)
 
-                subtopics=subtopics1.split(",")
-                print(subtopics)
-                blog1=text_gen(subtopics[0])
-                blog2=text_gen(subtopics[1])
-                blog3=text_gen(subtopics[2])
-                blog4=text_gen(subtopics[3])
+                    subtopics=subtopics1.split(",")
+                    print(subtopics)
+                    blog1=text_gen(subtopics[0])
+                    blog2=text_gen(subtopics[1])
+                    blog3=text_gen(subtopics[2])
+                    blog4=text_gen(subtopics[3])
 
-                image_prompt=text_prompt(topic)
-                generate(image_prompt+"image quality 8k ")
-                id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
-                time.sleep(10)
-                text=text_social(subtopics1)
-                twitter_posting(text,id)
+                    image_prompt=text_prompt(topic)
+                    generate(image_prompt+"image quality 8k ")
+                    id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
+                    time.sleep(10)
+                    text=text_social(subtopics1)
+                    twitter_posting(text,id)
 
 
-                topics["topics"][i]="done"
-                topics.to_csv("topics.csv",index=False)
-                for i in range(12*60*60):
-                    tim=12*60*60
-                    i=i+1
-                    b=4*60*60
-                    if i%b==0:
-                        text=text_social(subtopics1)
-                        twitter_posting(text,id)
-                    time.sleep(1)
-                    print("new post will be uploaded after ",tim-i," Seconds")
+                    topics["topics"][i]="done"
+                    topics.to_csv("topics.csv",index=False)
+                    for i in range(12*60*60):
+                        tim=12*60*60
+                        i=i+1
+                        b=4*60*60
+                        if i%b==0:
+                            text=text_social(subtopics1)
+                            twitter_posting(text,id)
+                        time.sleep(1)
+                        print("new post will be uploaded after ",tim-i," Seconds")
 
-        fields["fields"][i]="done"
-        os.remove("topics.csv")
-        fields.to_csv("fields.csv",index=False)
+            fields["fields"][i]="done"
+            os.remove("topics.csv")
+            fields.to_csv("fields.csv",index=False)
+except Exception as e:
+    print("error ",e)
