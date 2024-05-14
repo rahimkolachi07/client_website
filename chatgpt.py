@@ -40,7 +40,7 @@ def text_social(message):
    return answer
 
 def text_short(message):
-   messages = [ {"role": "system", "content":" limit the text. not more then 230 characters. just keep the same text just limit the characters."},{"role": "user", "content":" limit the characters not more then 230 characters = "+message+". " }, ]
+   messages = [ {"role": "system", "content":" limit the text. not more then 200 characters. just keep the same text just limit the characters."},{"role": "user", "content":" limit the characters not more then 200 characters = "+message+". " }, ]
    chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
    answer = chat.choices[0].message.content
    return answer
