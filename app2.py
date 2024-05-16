@@ -60,7 +60,7 @@ for i, field in enumerate(fields["fields"]):
                         blog4=text_gen(subtopics[3])
 
                         image_prompt=text_prompt(topic)
-                        generate(image_prompt+"image quality 8k ")
+                        #generate(image_prompt+"image quality 8k ")
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
                         

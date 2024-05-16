@@ -51,7 +51,7 @@ def blog_post(topic,subtopics,blog1,blog2,blog3,blog4):
 
     """
     post.post_status = 'publish'  # Cshange to 'draft' if you want to save as draft
-    post.thumbnail = upload_image("feature_image.png")
+    #post.thumbnail = upload_image("feature_image.png")
 
     # Publish the post
     post_id = client.call(NewPost(post))
