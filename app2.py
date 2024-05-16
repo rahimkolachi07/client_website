@@ -3,6 +3,8 @@ from chatgpt import *
 from blog_upload import *
 import time
 from social import *
+import datetime
+
 
 text="""
 
@@ -61,30 +63,22 @@ for i, field in enumerate(fields["fields"]):
                         generate(image_prompt+"image quality 8k ")
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
-                        main_tweet=text_social(subtopics1)
-                        text=text_short(main_tweet)
-                        while len(text)>210:
-                            print("text length is "+str(len(text)))
-                            text=text_short(main_tweet)
-                            main_tweet=text
-                            time.sleep(5)
-
-
-                        twitter_posting(text,id)
-
+                        
+                        current_time = datetime.datetime.now().time()
+                        while current_time.hour%12 !=0:
+                            current_time = datetime.datetime.now().time()
+                            if current_time.hour%4.5==0:
+                                main_tweet=text_social(subtopics1)
+                                while len(text)>210:
+                                    print("text length is "+str(len(text)))
+                                    text=text_short(main_tweet)
+                                    main_tweet=text
+                                twitter_posting(text,id)
+                            print("current time is ",current_time,"post will be update on",current_time%4.5)
+                        time.sleep(2*60*60)
 
                         topics["topics"][i]="done"
                         topics.to_csv("topics.csv",index=False)
-                        for i in range(12*60*60):
-                            tim=12*60*60
-                            i=i+1
-                            b=4*60*60
-                            if i%b==0:
-                                main_tweet=text_social(subtopics1)
-                                text=text_social(main_tweet)
-                                twitter_posting(text,id)
-                            time.sleep(1)
-                            print("new post will be uploaded after ",tim-i," Seconds")
                 except Exception as e:
                     print("error ", e)
 
