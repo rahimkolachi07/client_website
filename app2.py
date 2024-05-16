@@ -63,7 +63,7 @@ for i, field in enumerate(fields["fields"]):
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
                         print("point1")
-                        z=0
+                        z=1
                         while z%(12*60*60)!=0:
                             z=z+1
                             time.sleep(1)
