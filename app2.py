@@ -60,21 +60,23 @@ for i, field in enumerate(fields["fields"]):
                         blog4=text_gen(subtopics[3])
 
                         image_prompt=text_prompt(topic)
-                        #generate(image_prompt+"image quality 8k ")
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
                         
                         current_time = datetime.datetime.now().time()
-                        while int(current_time.hour)%12 !=0:
+                        print("point1")
+                        while int(int(current_time.hour)%12) !=0:
                             current_time = datetime.datetime.now().time()
-                            if int(current_time.hour)%4.5==0:
+                            print("point2")
+                            if int(int(current_time.hour)%4)==0:
+                                print("point3")
                                 main_tweet=text_social(subtopics1)
                                 while len(text)>210:
                                     print("text length is "+str(len(text)))
                                     text=text_short(main_tweet)
                                     main_tweet=text
                                 twitter_posting(text,id)
-                            print("current time is ",current_time,"post will be update on",current_time%4.5)
+                            print("current time is ",current_time,"post will be update on",current_time%5)
                         time.sleep(2*60*60)
 
                         topics["topics"][i]="done"
