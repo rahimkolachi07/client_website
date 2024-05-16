@@ -62,14 +62,14 @@ for i, field in enumerate(fields["fields"]):
                         image_prompt=text_prompt(topic)
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
-                        
-                        current_time = datetime.datetime.now().time()
                         print("point1")
-                        while int(int(current_time.hour)%12) !=0:
+                        z=0
+                        while z%(12*60*60)!=0:
+                            z=z+1
+                            time.sleep(1)
                             try:
-                                current_time = datetime.datetime.now().time()
                                 print("point2")
-                                if int(int(current_time.hour)%4)==0:
+                                if z%(5*60*60)==0:
                                     print("point3")
                                     main_tweet=text_social(subtopics1)
                                     while len(text)>210:
@@ -82,9 +82,7 @@ for i, field in enumerate(fields["fields"]):
                                 print("while loop")
                             except Exception as e:
                                 print(e)
-                            print("current time is ",current_time,"post will be update on",current_time%5)
-                        time.sleep(2*60*60)
-
+                            print("post will be update soon")
                         topics["topics"][i]="done"
                         topics.to_csv("topics.csv",index=False)
                 except Exception as e:
