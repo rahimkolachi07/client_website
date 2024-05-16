@@ -66,16 +66,22 @@ for i, field in enumerate(fields["fields"]):
                         current_time = datetime.datetime.now().time()
                         print("point1")
                         while int(int(current_time.hour)%12) !=0:
-                            current_time = datetime.datetime.now().time()
-                            print("point2")
-                            if int(int(current_time.hour)%4)==0:
-                                print("point3")
-                                main_tweet=text_social(subtopics1)
-                                while len(text)>210:
-                                    print("text length is "+str(len(text)))
-                                    text=text_short(main_tweet)
-                                    main_tweet=text
-                                twitter_posting(text,id)
+                            try:
+                                current_time = datetime.datetime.now().time()
+                                print("point2")
+                                if int(int(current_time.hour)%4)==0:
+                                    print("point3")
+                                    main_tweet=text_social(subtopics1)
+                                    while len(text)>210:
+                                        
+                                        text=text_short(main_tweet)
+                                        main_tweet=text
+                                        print("text length is "+str(len(text)))
+                                    twitter_posting(text,id)
+                                    print("tweets ")
+                                print("while loop")
+                            except Exception as e:
+                                print(e)
                             print("current time is ",current_time,"post will be update on",current_time%5)
                         time.sleep(2*60*60)
 
