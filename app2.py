@@ -62,9 +62,15 @@ for i, field in enumerate(fields["fields"]):
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
                         time.sleep(10)
                         main_tweet=text_social(subtopics1)
-                        text=text_social(main_tweet)
+                        text=text_short(main_tweet)
+                        while len(text)>210:
+                            print("text length is "+str(len(text)))
+                            text=text_short(main_tweet)
+                            main_tweet=text
+                            time.sleep(5)
 
-                        twitter_posting(text[:250],id)
+
+                        twitter_posting(text,id)
 
 
                         topics["topics"][i]="done"

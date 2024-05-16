@@ -1,3 +1,6 @@
-i=10
-b=20
-print(i%b)
+text="""how are you sdasdasdnas  
+bksdbashkdbkasbdkasbd
+nklnasklndasn"""
+
+text=text.split("\n")
+print(text)
