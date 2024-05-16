@@ -40,7 +40,7 @@ def text_social(message):
    return answer
 
 def text_short(message):
-   messages = [ {"role": "system", "content":" act as text summarizer with 20 year experience in text summarization."},{"role": "user", "content":" summarzie the text. = "+message+". word must not be more then 30. add 3 # tages related with topi" }, ]
+   messages = [ {"role": "system", "content":" act as spanish text summarizer with 20 year experience in text summarization."},{"role": "user", "content":" summarzie the text. = "+message+". word must not be more then 30. add 3 # tages related with topi. must be spanish languages" }, ]
    chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
    answer = chat.choices[0].message.content
    return answer
