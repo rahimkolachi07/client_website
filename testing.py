@@ -1,6 +1,3 @@
-text="""how are you sdasdasdnas  
-bksdbashkdbkasbdkasbd
-nklnasklndasn"""
-
-text=text.split("\n")
-print(text)
+import datetime
+current_time = datetime.datetime.now().time()
+print(int(current_time.hour))

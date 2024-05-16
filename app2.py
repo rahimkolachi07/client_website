@@ -65,9 +65,9 @@ for i, field in enumerate(fields["fields"]):
                         time.sleep(10)
                         
                         current_time = datetime.datetime.now().time()
-                        while current_time.hour%12 !=0:
+                        while int(current_time.hour)%12 !=0:
                             current_time = datetime.datetime.now().time()
-                            if current_time.hour%4.5==0:
+                            if int(current_time.hour)%4.5==0:
                                 main_tweet=text_social(subtopics1)
                                 while len(text)>210:
                                     print("text length is "+str(len(text)))
