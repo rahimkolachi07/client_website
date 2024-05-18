@@ -23,30 +23,30 @@ def blog_post(topic,subtopics,blog1,blog2,blog3,blog4):
     post.title = topic
     post.content = f"""
     <h3>{subtopics[0]}</h3>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog1[0]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog1[2]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog1[4]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog1[0]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog1[2]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog1[4]}</p>
 
 
     
     <h3>{subtopics[1]}</h3>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog2[0]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog2[2]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog2[4]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog2[0]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog2[2]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog2[4]}</p>
 
 
 
     <h3>{subtopics[2]}</h3>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog3[0]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog3[2]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog3[4]}</p>
+    <p align="justify" style="color: white; font-size: 16px; ">{blog3[0]}</p>
+    <p align="justify" style="color: white; font-size: 16px; ">{blog3[2]}</p>
+    <p align="justify" style="color: white; font-size: 16px; ">{blog3[4]}</p>
 
 
 
     <h3>{subtopics[3]}</h3>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog4[0]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog4[2]}</p>
-    <p align="justify" style="color: white; font-size: 18px; font-weight: bold;">{blog4[4]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog4[0]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog4[2]}</p>
+    <p align="justify" style="color: white; font-size: 16px;">{blog4[4]}</p>
 
 
     """

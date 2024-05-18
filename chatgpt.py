@@ -3,7 +3,7 @@ import pandas as pd
 openai.api_key = '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'
 def text_topics(message):
    messages = [ {"role": "system", "content":f"You have 30 year experience of blog writing on {message}. write titles 200 on {message} . best titles in only spanish. return me comma seperated titles. dont write number or any other charecter, just return topics  "},{"role": "user", "content": "write 200 best topic names for "+message}, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    topics=pd.DataFrame({"topics":answer.split(",")})
    topics.to_csv("topics.csv",index=False)
@@ -11,37 +11,37 @@ def text_topics(message):
 
 def text_subtopic(message):
    messages = [ {"role": "system", "content":"You have 30 year experience of blog writing. write subtopics. must be comma seperated. should be best subtopics in spanish. i need in spanish language"},{"role": "user", "content": "write an 4 sub topics on main topic=  ["+message+"] in spanish"}, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
 def text_gen(message):
    messages = [ {"role": "system", "content":"You have 30 year experience of content writing. write three best paragraphs. write in only spanish. dont use any sub headings just write 3 long paragraph on given topic  "},{"role": "user", "content": "write an perfect three paragraph in spanish and focuse on topic. this is= "+message}, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
 def text_prompt(message):
    messages = [ {"role": "system", "content":" You have 30 year experience of prompt writing . write an prompt for image generation. image must describe the main purpose of topic. return best image generation prompt. make it short prompt. i want 8k images quality. hight quality image focuse on main topic. i need for feature image. write an best prompt for feature image according to user data ."},{"role": "user", "content":message }, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
 def text_title(message):
    messages = [ {"role": "system", "content":"You have 30 year experience of title writting. anaylyze the complete text and writ best title.retun an only title. "},{"role": "user", "content":message }, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
 def text_social(message):
-   messages = [ {"role": "system", "content":" Buenas chat, a partir de ahora vamos a realizar una tarea muy pero que muy importante. Soy el dueño de Spreadit Marketing, una agencia de marketing digital que ofrecemos los siguientes servicios: Branding, Páginas web, SEO y SEM, Redes sociales, Estrategia digital, Diseño, Hostess y Eventos, Brading y Rebrading, Anuncios y publicidad, Shootings, Merchandising y soluciones IA. Tenemos ya más de 35 clientes y hemos decidido pasar la agencia al siguiente nivel, y es por eso que estamos haciendo un rebranding completo. A partir de ahora quiero que actúes como consultor experto en persuasión, marketing, ventas, comunicación y experto en cualquier área relacionada para que me ayudes a definir bien la marca Spreadit. Ahora haremos la generación de tweets para twiter en español para complementar el contenido de nuestra red social. Debes actuar como un experto en copywritting y marketing. Debes usar palabras clave de una agencia de marketing, utiliza sobre todo, siempre que puedas, lo siguiente: - precio página web - diseño de paginas web precios - gestión redes sociales - creación páginas web profesionales - agencias de eventos barcelona Crea tweets cortos con contenido muy interactivo y interesante, que cualquier persona pueda leerlo y le sea interesante, que no se haga aburrido. dont exceed 230 character. text must be under 200 character."},{"role": "user", "content":"write best short tweet and in last of the tweet write few short catchy, attractive lines on = "+message+". " }, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   messages = [ {"role": "system", "content":" Buenas chat, a partir de ahora vamos a realizar una tarea muy pero que muy importante. Soy el dueño de Spreadit Marketing, una agencia de marketing digital que ofrecemos los siguientes servicios: Branding, Páginas web, SEO y SEM, Redes sociales, Estrategia digital, Diseño, Hostess y Eventos, Brading y Rebrading, Anuncios y publicidad, Shootings, Merchandising y soluciones IA. Tenemos ya más de 35 clientes y hemos decidido pasar la agencia al siguiente nivel, y es por eso que estamos haciendo un rebranding completo. A partir de ahora quiero que actúes como consultor experto en persuasión, marketing, ventas, comunicación y experto en cualquier área relacionada para que me ayudes a definir bien la marca Spreadit. Ahora haremos la generación de tweets para twiter en español para complementar el contenido de nuestra red social. Debes actuar como un experto en copywritting y marketing. Debes usar palabras clave de una agencia de marketing, utiliza sobre todo, siempre que puedas, lo siguiente: - precio página web - diseño de paginas web precios - gestión redes sociales - creación páginas web profesionales - agencias de eventos barcelona Crea tweets cortos con contenido muy interactivo y interesante, que cualquier persona pueda leerlo y le sea interesante, que no se haga aburrido. dont exceed 230 character. text must be under 200 character. write best tweet about topic"},{"role": "user", "content":"write best short tweet and in last of the tweet write few short catchy, attractive lines on = "+message+". " }, ]
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
 def text_short(message):
-   messages = [ {"role": "system", "content":" act as spanish text summarizer with 20 year experience in text summarization."},{"role": "user", "content":" summarzie the text. = "+message+". word must not be more then 30. add 3 # tages related with topi. must be spanish languages" }, ]
-   chat = openai.ChatCompletion.create( model="gpt-4", messages=messages)
+   messages = [ {"role": "system", "content":" act as spanish text summarizer with 20 year experience in text summarization. must be best tweet related topic"},{"role": "user", "content":" summarzie the text. = "+message+". word must not be more then 30. add 3 # tages related with topi. must be spanish languages" }, ]
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
    answer = chat.choices[0].message.content
    return answer
 
