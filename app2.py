@@ -24,7 +24,7 @@ Crea blogs con contenido muy interactivo y interesante, que cualquier persona pu
 
 """
 fields=["Branding", "Sitios Web", "SEO y SEM","Redes Sociales", "Estrategia Digital", "Diseño", "Azafatas y Eventos", "Branding y Rebranding", "Ads y Publicidad", "Shootings", "Merchandising y soluciones de IA"]
-
+x=1
 if os.path.exists("fields.csv"):
     fields=pd.read_csv("fields.csv")
 else:
@@ -64,12 +64,14 @@ for i, field in enumerate(fields["fields"]):
                         time.sleep(10)
                         print("point1")
                         z=1
+                        
                         while z%(12*60*60)!=0:
                             z=z+1
+                            x=x+1
                             time.sleep(1)
                             try:
                                 print("point2")
-                                if z%(5*60*60)==0:
+                                if x%(4*60*60)==0:
                                     print("point3")
                                     main_tweet=text_social(subtopics1)
                                     while len(text)>210:
