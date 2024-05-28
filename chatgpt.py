@@ -45,6 +45,14 @@ def text_short(message):
    answer = chat.choices[0].message.content
    return answer
 
+def text_inp(syste,users):
+   messages = [ {"role": "system", "content":syste},{"role": "user", "content": users}, ]
+   chat = openai.ChatCompletion.create( model="gpt-4o", messages=messages)
+   answer = chat.choices[0].message.content
+   topics=pd.DataFrame({"topics":answer.split(",")})
+   topics.to_csv("topics.csv",index=False)
+   return answer
+
 
 # importing other libraries 
 import requests 

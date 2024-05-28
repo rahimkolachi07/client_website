@@ -4,6 +4,7 @@ from blog_upload import *
 import time
 from social import *
 import datetime
+from email_sending import *
 
 
 text="""
@@ -61,6 +62,7 @@ for i, field in enumerate(fields["fields"]):
 
                         image_prompt=text_prompt(topic)
                         id=blog_post(topic,subtopics,blog1,blog2,blog3,blog4)
+                        email_send(f"main topic {topic}. subtopics {subtopics[0]}, {subtopics[1]}, {subtopics[2]}, {subtopics[3]},", f"https://www.spreadit.es/?p={str(id)}")
                         time.sleep(10)
                         print("point1")
                         z=1
